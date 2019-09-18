@@ -1,10 +1,13 @@
 from enum import Enum, auto
+import json
+#from classes import hours, leg, flight
+
 ##################################################
 ##                                              ##
 ##                 ENUM DEFINITIONS             ##
 ##                                              ##
 ##################################################
-class role_enum(Enum):
+class Role(Enum):
   ACFT_CMDR = 'A'
   OBSERVER = 'B'
   COPILOT = 'C'
@@ -23,7 +26,7 @@ class role_enum(Enum):
   NFO = 'P'
   COMMUNICATIONS = 'Q'
   RADAR = 'R'
-  AC_FT_MSN_CMDR = 'S'
+  AC_MSN_CMDR = 'S'
   CREW_UNDER_TRAINING = 'T'
   NON_CREW_UNDER_TRAINING = 'U'
   OTHER = 'V'
@@ -73,7 +76,7 @@ class tz_enum(Enum):
     Y = 'Etc/GMT+12'
     Z = 'Etc/GMT'
 
-class ldg_enum(Enum):
+class Landing(Enum):
     DayLdg = '6'
     NightLdg = 'F'
     NVGLdg = 'P'
@@ -98,8 +101,9 @@ class ldg_enum(Enum):
     NightVSTOLVert = 'J'
     NightVSTOLVertRoll = 'K'
     NVGFDLP = 'Q'
+    OTHER = '?'
 
-class app_enum(Enum):
+class Approach(Enum):
     PrecisionActual = '1'
     PrecisionSimulated = 'A'
     NonprecisionActual = '2'
@@ -107,6 +111,7 @@ class app_enum(Enum):
     AutoActual = '3'
     AutoSimulated = 'C'
     AutoNVD = '4'
+    OTHER = '?'
 
 class hours_enum(Enum):
     PIC = "Pilot in Command"
@@ -126,3 +131,26 @@ class hours_enum(Enum):
     CMDR = "Aircraft Commander"
     SCT = "Special Crew Time"
     TR = "T&R Codes"
+
+# class EnumEncoder(json.JSONEncoder):
+#     def default(self, obj):
+#         print(type(obj))
+#         if type(obj) in PUBLIC_ENUMS.values():
+#             print("ENUM~~~~~~~~~~~~~~~~~~")
+#             return {"__enum__":str(obj)}
+#         if type(obj) in ["legs", "hours", "flight"]:
+#             return obj.toJSON()
+#         #if type(obj) in ["flight"]:
+#         #    return json.dumps(obj, default=lambda o: o.__dict__)
+#         return json.JSONEncoder.default(self, obj)
+#
+# PUBLIC_ENUMS = {
+#     'Role': Role,
+#     # ...
+# }
+#
+# PUBLIC_CLASSES = {
+#     'flight': flight,
+#     'leg': leg,
+#     'hours': hours
+# }
